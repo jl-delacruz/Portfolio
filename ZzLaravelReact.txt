@@ -1,0 +1,21 @@
+Terminal:
+    laravel new portfolio
+    cd portfolio
+    npm install && npm run build
+    composer run dev
+    
+#edit .env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=laravel_react_db
+    DB_USERNAME=root
+    DB_PASSWORD=your_password
+
+#edit app/Providers/AppServiceProvider.php
+    use Illuminate\Support\Facades\Schema;
+
+    public function boot()
+    {
+        Schema::defaultStringLength(191);
+    }

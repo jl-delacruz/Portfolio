@@ -1,0 +1,74 @@
+#Databases
+
+#mysql
+    #setup mysql
+    edit .env
+        DB_CONNECTION=mysql
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+        DB_DATABASE=laravel
+        DB_USERNAME=root
+        DB_PASSWORD=
+
+    #create database
+        php artisan migrate
+
+    #create table
+        #create empty migration
+            php artisan make:migration StudentTable
+
+        #create database Schema with table id and timestamps, and dropIfExists
+            pgp artisan make:migration create_students_table
+
+        #create migration to add date of birth to students
+            php artisan make:migration addDateOfBirthToStudents --table=student
+
+        #create id forein key to users table
+            php artisan make:migration addUserIdToStudents --table=student
+
+
+
+
+        #rollback last migration (undo)
+            php artisan migrate:rollback
+        #rollback last migration with steps(undo), step=1 rollbacks last migration
+            php artisan migrate:rollback --step=3 
+        
+        #reset all migrations
+            php artisan migrate:reset
+
+        #reset all migrations and re-run migrations, delete all values in the database tables
+            php artisan migrate:fresh
+
+        #edit migration to save table (save)
+            php artisan migrate
+--------------------------------------------------------------------------------------------
+#Controllers
+
+#Create Controller with only one method
+    php artisan make:controller TestController --invokable
+#Create Controller with CRUD methods
+    php artisan make:controller TestController --resource
+
+--------------------------------------------------------------------------------------------
+#Models
+
+#Create Model
+    php artisan make:model Student
+
+#Create Model with migration(m) and controller(c)
+    php artisan make:model Teacher --mc
+
+
+#Factory
+    #create factory
+        php artisan make:factory Student --model=Student
+        //edit factory, model and seeders
+        php artisan db:seed
+
+--------------------------------------------------------------------------------------------
+#sample
+    php artisan make:model Countries -mc
+    php artisan make:seeder CountriesSeeder
+    php artisan migrate:fresh --seed
+    php artisan db:seed --class=CountriesSeeder
